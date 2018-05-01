@@ -10,19 +10,12 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods.gastweaker.GasFactory")
 public class GasFactory {
 	/*@ZenMethod
-    public static void registerGas(String unlocalizedName, String icon) {
-		Gas gas = new Gas(unlocalizedName, icon);
-		GasRegistry.register(gas);
-		gas.registerFluid();
+	public static GasRepresentation createGas(String unlocalizedName) {
+		return new GasRepresentation(unlocalizedName);
 	}*/
 	
 	@ZenMethod
-    public static GasRepresentation createGas(String unlocalizedName) {
-		return new GasRepresentation(unlocalizedName);
-	}
-	
-	@ZenMethod
-    public static GasRepresentation createGas(ILiquidStack stackFluid) {
+	public static GasRepresentation createFromFluid(ILiquidStack stackFluid) {
 		Fluid fluid = (Fluid) stackFluid.getDefinition().getInternal();
 		return new GasRepresentation(fluid);
 	}
