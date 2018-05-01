@@ -1,24 +1,25 @@
+[![](http://cf.way2muchnoise.eu/293110.svg)](https://minecraft.curseforge.com/projects/gastweaker) [![](http://cf.way2muchnoise.eu/versions/Minecraft_293110_all.svg)](https://minecraft.curseforge.com/projects/gastweaker)
+
+# [GasTweaker](https://minecraft.curseforge.com/projects/gastweaker)
+
 GasTweaker is a CraftTweaker add-on that help adding Mekanism Gas.
 
-Some temporary zenscript examples : 
+More information on CurseForge Project Page : https://minecraft.curseforge.com/projects/gastweaker
+
+Some zenscript examples : 
 
 ```
-import mods.gastweaker.GasFactory;
-import mods.gastweaker.Gas;
+import mods.gastweaker.GasFactory; 
+import mods.gastweaker.Gas; 
+// Retrieve fluid with crafttweaker 
+var lava = <liquid:lava>; 
+// Create Gas 
+var lavaGas = GasFactory.createFromFluid(lava); 
+// Register Gas lavaGas.register();
 
-var helium17 = GasFactory.createGas("helium17");
-helium17.setNeedFluid(true);
-helium17.setIcon("fluids/helium17");
-helium17.register();
-
-
-var lava = <liquid:lava>;
-var lavaGas = GasFactory.createGas(lava);
-lavaGas.register();
-
-
-var helium3 = <liquid:helium3>; // <-- helium3 is created with ContentTweaker
-var helium3Gas = GasFactory.createGas(helium3);
+// Another one
+var helium3 = <liquid:helium3>; // <- He3 is a fluid from another mod
+var helium3Gas = GasFactory.createFromFluid(helium3);
 helium3Gas.setColorize(true);
 helium3Gas.setColor(0xff69b4);
 helium3Gas.register();
