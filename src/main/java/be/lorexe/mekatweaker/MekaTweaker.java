@@ -1,4 +1,4 @@
-package be.lorexe.gastweaker;
+package be.lorexe.mekatweaker;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -25,38 +25,35 @@ import java.io.File;
 
 import org.apache.logging.log4j.Logger;
 
-import be.lorexe.gastweaker.zenscript.PluginCraftTweaker;
+import be.lorexe.mekatweaker.crafttweaker.PluginCraftTweaker;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasRegistry;
+import mekanism.api.infuse.InfuseRegistry;
+import mekanism.api.infuse.InfuseType;
 
-@Mod(modid = GasTweaker.MODID, name = GasTweaker.NAME, version = GasTweaker.VERSION, dependencies = GasTweaker.DEPENDS)
-public class GasTweaker {
+@Mod(modid = MekaTweaker.MODID, name = MekaTweaker.NAME, version = MekaTweaker.VERSION, dependencies = MekaTweaker.DEPENDS)
+public class MekaTweaker {
 
-	public static final String MODID = "gastweaker";
-	public static final String NAME = "GasTweaker";
-	public static final String VERSION = "1.0";
-	public static final String DEPENDS = "required-after:crafttweaker;required-after:mekanism;";
+	public static final String MODID = "mekatweaker";
+	public static final String NAME = "MekaTweaker";
+	public static final String VERSION = "1.1";
+	public static final String DEPENDS = "required-after:crafttweaker;required-after:mekanism;required-after:resourceloader";
 
 	@Instance(MODID)
-	public static GasTweaker instance;
+	public static MekaTweaker instance;
 
-	@SidedProxy(clientSide = "be.lorexe.gastweaker.client.ClientProxy", serverSide = "be.lorexe.gastweaker.CommonProxy")
+	@SidedProxy(clientSide = "be.lorexe.mekatweaker.client.ClientProxy", serverSide = "be.lorexe.mekatweaker.CommonProxy")
 	public static CommonProxy proxy;
 
 	public static Logger logger;
 	
-	private File resourceFolder;
-	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		proxy.createResourceLoader();
+		proxy.preInit();
 		
 		logger = event.getModLog();
-
-		PluginCraftTweaker.init();
 		
-		File minecraftFolder = event.getModConfigurationDirectory().getParentFile();
-		this.resourceFolder = new File(minecraftFolder, "resources");
+		PluginCraftTweaker.init();
 	}
 
 	@EventHandler
@@ -68,8 +65,8 @@ public class GasTweaker {
 	public void postInit(FMLPostInitializationEvent event) {
 		
 	}
-	
-	public File getResourceFolder() {
-        return new File(resourceFolder, GasTweaker.MODID);
+
+	public Logger getLogger() {
+		return this.logger;
 	}
 }

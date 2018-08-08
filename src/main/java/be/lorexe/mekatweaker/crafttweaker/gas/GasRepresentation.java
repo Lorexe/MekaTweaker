@@ -1,6 +1,7 @@
-package be.lorexe.gastweaker.zenscript;
+package be.lorexe.mekatweaker.crafttweaker.gas;
 
-import be.lorexe.gastweaker.GasTweaker;
+import be.lorexe.mekatweaker.MekaTweaker;
+import crafttweaker.CraftTweakerAPI;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasRegistry;
 import net.minecraft.block.Block;
@@ -19,23 +20,25 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 import stanhebben.zenscript.annotations.ZenProperty;
 
-@ZenClass("mods.gastweaker.Gas")
+@ZenClass("mods.mekatweaker.Gas")
 public class GasRepresentation {
 	@ZenProperty
 	public String unlocalizedName;
 	@ZenProperty
-	public ResourceLocation icon = new ResourceLocation(GasTweaker.MODID, "blocks/fluid_base");
+	public ResourceLocation icon = null;
+	@ZenProperty
+	public ResourceLocation iconFlow = null;
 	@ZenProperty
 	public boolean colorize = false;
 	@ZenProperty
 	public int color;
 	
-	/*
+	
 	@ZenProperty
-	public boolean needFluid = true;
+	public boolean needFluid = false;
 	@ZenProperty
 	public boolean needBucket = true;
-	*/
+	
 	
 	@ZenProperty
 	public Fluid fluid = null;
@@ -63,10 +66,10 @@ public class GasRepresentation {
 	private ResourceLocation getIcon() {
 		return this.icon;
 	}
-	/*
+	
 	@ZenMethod
 	public void setIcon(String icon) {
-		setIcon(GasTweaker.MODID, icon);
+		setIcon(MekaTweaker.MODID, icon);
 	}
 	@ZenMethod
 	public void setIcon(String domain, String icon) {
@@ -75,7 +78,23 @@ public class GasRepresentation {
 	private void setIcon(ResourceLocation icon) {
 		this.icon = icon;
 	}
-	 */
+	
+	private ResourceLocation getIconFlowing() {
+		return (this.iconFlow != null) ? this.iconFlow : getIcon();
+	}
+	
+	@ZenMethod
+	public void setIconFlowing(String icon) {
+		setIconFlowing(MekaTweaker.MODID, icon);
+	}
+	@ZenMethod
+	public void setIconFlowing(String domain, String icon) {
+		setIconFlowing(new ResourceLocation(domain, icon));
+	}
+	private void setIconFlowing(ResourceLocation icon) {
+		this.iconFlow = icon;
+	}
+	
 	@ZenMethod
 	public int getColor() {
 		return this.color;
@@ -93,7 +112,7 @@ public class GasRepresentation {
 	public void setColorize(boolean colorize) {
 		this.colorize = colorize;
 	}
-	/*
+	
 	@ZenMethod
 	public boolean needFluid() {
 		return this.needFluid;
@@ -111,21 +130,25 @@ public class GasRepresentation {
 	public void setNeedBucket(boolean need) {
 		this.needBucket = need;
 	}
-	*/
+	
 	@ZenMethod
 	public void register() {
-		/*if(!this.fromFluid && this.needFluid) {
+		if(!this.fromFluid && this.needFluid) {
 			if(this.fluid == null) {
 				if(FluidRegistry.getFluid(unlocalizedName) == null) {
-					this.fluid = new Fluid(unlocalizedName, getIcon(), getIcon());
+					if(getIcon() == null) {
+						CraftTweakerAPI.logWarning("MekaTweaker: Gas " + unlocalizedName + " doesn't have icon set!");
+						return;
+					}
+					
+					this.fluid = new Fluid(unlocalizedName, getIcon(), getIconFlowing());
 					FluidRegistry.registerFluid(this.fluid);
 
 					Block blockFluid = new BlockFluidClassic(this.fluid, Material.WATER);
-					blockFluid.setRegistryName(new ResourceLocation(GasTweaker.MODID, unlocalizedName));
+					blockFluid.setRegistryName(new ResourceLocation(MekaTweaker.MODID, unlocalizedName));
 					ForgeRegistries.BLOCKS.register(blockFluid);
-					GasTweaker.proxy.registerFluidBlockRendering(blockFluid, unlocalizedName);
-
-					this.fluid.setBlock(blockFluid);
+					
+					MekaTweaker.proxy.registerFluidBlockRendering(this.fluid);
 
 					if(this.needBucket)
 						FluidRegistry.addBucketForFluid(this.fluid);
@@ -134,26 +157,18 @@ public class GasRepresentation {
 					this.fluid = FluidRegistry.getFluid(unlocalizedName);
 				}
 			}
-		}*/
-
-		Gas gas = new Gas(this.fluid);
-		/*if(this.fromFluid)  gas = new Gas(this.fluid);
-    	else				gas = new Gas(this.unlocalizedName, this.icon);*/
+			
+			this.fromFluid = true;
+		}
+		
+		Gas gas;
+		if(this.fromFluid)  gas = new Gas(this.fluid);
+    	else				gas = new Gas(this.unlocalizedName, this.icon);
 
 		GasRegistry.register(gas);
 
 		if(this.colorize) {
 			gas.setTint(this.color);
 		}
-
-		/*
-		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-			gas.registerIcon(Minecraft.getMinecraft().getTextureMapBlocks());
-			gas.updateIcon(Minecraft.getMinecraft().getTextureMapBlocks());
-		}
-		if(!this.fromFluid)
-			PluginCraftTweaker.registeredGasses.add(gas);
-		 */
-
 	}
 }

@@ -1,18 +1,16 @@
-package be.lorexe.gastweaker.zenscript;
+package be.lorexe.mekatweaker.crafttweaker.gas;
 
 import crafttweaker.api.liquid.ILiquidStack;
-import mekanism.api.gas.Gas;
-import mekanism.api.gas.GasRegistry;
 import net.minecraftforge.fluids.Fluid;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-@ZenClass("mods.gastweaker.GasFactory")
+@ZenClass("mods.mekatweaker.GasFactory")
 public class GasFactory {
-	/*@ZenMethod
+	@ZenMethod
 	public static GasRepresentation createGas(String unlocalizedName) {
 		return new GasRepresentation(unlocalizedName);
-	}*/
+	}
 	
 	@ZenMethod
 	public static GasRepresentation createFromFluid(ILiquidStack stackFluid) {

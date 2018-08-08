@@ -1,8 +1,7 @@
 [
 {
-  "modid": "gastweaker",
-  "name": "GasTweaker",
-  "description": "Add Mekanism Gas with ZenScript(CraftTweaker)",
+  "modid": "mekatweaker",
+  "name": "MekaTweaker",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",

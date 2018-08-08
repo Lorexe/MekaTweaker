@@ -11,9 +11,9 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "1.0"
-group = "be.lorexe.gastweaker"
-archivesBaseName = "gastweaker-${mc_version}"
+version = "1.1"
+group = "be.lorexe.mekatweaker"
+archivesBaseName = "mekatweaker-${mc_version}"
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 compileJava {
@@ -21,7 +21,7 @@ compileJava {
 }
 
 minecraft {
-    version = "1.12.2-14.23.3.2673"
+    version = "1.12.2-14.23.4.2747"
     runDir = "run"
     
     mappings = "snapshot_20171003"
@@ -35,9 +35,9 @@ repositories {
 }
 
 dependencies {
-	deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.6.467"
-	deobfCompile "CraftTweaker2:CraftTweaker2-API:4.1.6.467"
-	deobfCompile "CraftTweaker2:ZenScript:4.1.6.467"
+	deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.9.487"
+	deobfCompile "CraftTweaker2:CraftTweaker2-API:4.1.9.487"
+	deobfCompile "CraftTweaker2:ZenScript:4.1.9.487"
 	
 	compile fileTree(dir: 'libs', includes: ['*.jar']) 
 }
