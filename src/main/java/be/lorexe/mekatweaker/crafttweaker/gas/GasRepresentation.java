@@ -23,7 +23,7 @@ import stanhebben.zenscript.annotations.ZenProperty;
 @ZenClass("mods.mekatweaker.Gas")
 public class GasRepresentation {
 	@ZenProperty
-	public String unlocalizedName;
+	public String unlocalizedName = null;
 	@ZenProperty
 	public ResourceLocation icon = null;
 	@ZenProperty
@@ -162,13 +162,20 @@ public class GasRepresentation {
 		}
 		
 		Gas gas;
-		if(this.fromFluid)  gas = new Gas(this.fluid);
-    	else				gas = new Gas(this.unlocalizedName, this.icon);
-
-		GasRegistry.register(gas);
-
+		if(this.fromFluid) {
+			gas = new Gas(this.fluid);
+			
+			if(this.unlocalizedName != null)
+				gas.setUnlocalizedName(this.unlocalizedName);
+			
+		} else {
+			gas = new Gas(this.unlocalizedName, this.icon);
+		}
+		
 		if(this.colorize) {
 			gas.setTint(this.color);
 		}
+		
+		GasRegistry.register(gas);
 	}
 }

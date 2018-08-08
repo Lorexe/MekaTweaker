@@ -2,6 +2,7 @@
 {
   "modid": "mekatweaker",
   "name": "MekaTweaker",
+  "description": "Add support for infuser type and gas from Mekanism into CraftTweaker",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
