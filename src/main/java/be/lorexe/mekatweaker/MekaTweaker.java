@@ -36,8 +36,8 @@ public class MekaTweaker {
 
 	public static final String MODID = "mekatweaker";
 	public static final String NAME = "MekaTweaker";
-	public static final String VERSION = "1.1.1";
-	public static final String DEPENDS = "required-after:crafttweaker;required-after:mekanism;required-after:resourceloader";
+	public static final String VERSION = "1.1.2";
+	public static final String DEPENDS = "required-after:crafttweaker;required-after:mekanism";
 
 	@Instance(MODID)
 	public static MekaTweaker instance;
