@@ -1,11 +1,14 @@
 package be.lorexe.mekatweaker.crafttweaker.oldgas;
 
-import be.lorexe.mekatweaker.crafttweaker.gas.GasRepresentation;
 import crafttweaker.CraftTweakerAPI;
+import crafttweaker.annotations.ModOnly;
+import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.liquid.ILiquidStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+@ZenRegister
+@ModOnly("mekanism")
 @ZenClass("mods.gastweaker.GasFactory")
 @Deprecated
 public class OldGasFactory {
