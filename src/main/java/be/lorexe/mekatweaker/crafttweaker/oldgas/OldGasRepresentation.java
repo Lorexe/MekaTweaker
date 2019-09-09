@@ -1,19 +1,13 @@
 package be.lorexe.mekatweaker.crafttweaker.oldgas;
 
-import be.lorexe.mekatweaker.MekaTweaker;
-import crafttweaker.CraftTweakerAPI;
-import mekanism.api.gas.Gas;
-import mekanism.api.gas.GasRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.BlockFluidClassic;
+import crafttweaker.annotations.ModOnly;
+import crafttweaker.annotations.ZenRegister;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+@ZenRegister
+@ModOnly("mekanism")
 @ZenClass("mods.gastweaker.Gas")
 @Deprecated
 public class OldGasRepresentation {

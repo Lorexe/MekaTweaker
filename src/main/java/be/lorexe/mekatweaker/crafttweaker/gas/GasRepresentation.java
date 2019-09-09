@@ -2,6 +2,8 @@ package be.lorexe.mekatweaker.crafttweaker.gas;
 
 import be.lorexe.mekatweaker.MekaTweaker;
 import crafttweaker.CraftTweakerAPI;
+import crafttweaker.annotations.ModOnly;
+import crafttweaker.annotations.ZenRegister;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasRegistry;
 import net.minecraft.block.Block;
@@ -20,6 +22,8 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 import stanhebben.zenscript.annotations.ZenProperty;
 
+@ZenRegister
+@ModOnly("mekanism")
 @ZenClass("mods.mekatweaker.Gas")
 public class GasRepresentation {
 	@ZenProperty

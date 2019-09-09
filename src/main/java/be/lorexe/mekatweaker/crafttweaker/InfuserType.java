@@ -14,6 +14,8 @@ import net.minecraft.util.ResourceLocation;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+@ZenRegister
+@ModOnly("mekanism")
 @ZenClass("mods.mekatweaker.InfuserType")
 public class InfuserType {
 	@ZenMethod
